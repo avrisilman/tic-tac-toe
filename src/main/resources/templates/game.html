@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Play Game</title></head>
+<body>
+<h2>Tic Tac Toe</h2>
+<p th:if="${winner != ''}">Winner: <span th:text="${winner}"></span></p>
+<table border="1">
+    <tr th:each="i : ${#numbers.sequence(0, board.size - 1)}">
+        <td th:each="j : ${#numbers.sequence(0, board.size - 1)}">
+            <form th:action="@{/move}" method="post" th:if="${board.cells[i][j] == ''}">
+                <input type="hidden" name="row" th:value="${i}"/>
+                <input type="hidden" name="col" th:value="${j}"/>
+                <button type="submit">Move</button>
+            </form>
+            <span th:if="${board.cells[i][j] != ''}" th:text="${board.cells[i][j]}"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
